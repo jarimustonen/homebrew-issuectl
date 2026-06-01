@@ -1,28 +1,30 @@
 class Issuectl < Formula
   desc "AI-first CLI for managing markdown-based issues with YAML frontmatter"
   homepage "https://github.com/jarimustonen/issuectl"
-  version "0.6.1"
+  version "0.6.2"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.1/issuectl-aarch64-apple-darwin.tar.xz"
-      sha256 "689d942a270519c09bdc590500dfceb2b7a69b38df7f86596bb90dab56f529d1"
+      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.2/issuectl-aarch64-apple-darwin.tar.xz"
+      sha256 "6a465d7496fc986adf1aeedf941e679700c2dc7d8b11eec2942e36a6167d3adc"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.1/issuectl-x86_64-apple-darwin.tar.xz"
-      sha256 "0051c11803cc8faf0c342bbfad3c904f1c7f57b6375a8a9818163e7b16d29c68"
+      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.2/issuectl-x86_64-apple-darwin.tar.xz"
+      sha256 "30733b53be3be73261628bd0946ac9dc5a26baca31ccb35c182c7531348eb059"
     end
   end
-  if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.1/issuectl-x86_64-unknown-linux-gnu.tar.xz"
-    sha256 "375ab724ba62e9caa5e72273537b86ce7e6c60ac7fe927a9e5f86fdaff78e355"
+  if OS.linux?
+    if Hardware::CPU.intel?
+      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.2/issuectl-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "d6259508d081c0b935d30b9ef15d7b6fa75a82de75c980e863b9d842ba6a4750"
+    end
   end
   license "MIT"
 
   BINARY_ALIASES = {
-    "aarch64-apple-darwin":     {},
-    "x86_64-apple-darwin":      {},
-    "x86_64-unknown-linux-gnu": {},
-  }.freeze
+    "aarch64-apple-darwin": {},
+    "x86_64-apple-darwin": {},
+    "x86_64-unknown-linux-gnu": {}
+  }
 
   def target_triple
     cpu = Hardware::CPU.arm? ? "aarch64" : "x86_64"
@@ -40,9 +42,15 @@ class Issuectl < Formula
   end
 
   def install
-    bin.install "issuectl" if OS.mac? && Hardware::CPU.arm?
-    bin.install "issuectl" if OS.mac? && Hardware::CPU.intel?
-    bin.install "issuectl" if OS.linux? && Hardware::CPU.intel?
+    if OS.mac? && Hardware::CPU.arm?
+      bin.install "issuectl"
+    end
+    if OS.mac? && Hardware::CPU.intel?
+      bin.install "issuectl"
+    end
+    if OS.linux? && Hardware::CPU.intel?
+      bin.install "issuectl"
+    end
 
     install_binary_aliases!
 
