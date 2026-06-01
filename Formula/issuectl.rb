@@ -12,19 +12,17 @@ class Issuectl < Formula
       sha256 "d9787a0a45132e88f434ceb9133a59f9b1f2e80f281b49360bd7c6ad5bea1c82"
     end
   end
-  if OS.linux?
-    if Hardware::CPU.intel?
-      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.3/issuectl-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "474737ab4f69595f984cf4f889901691afed738a50f5964de53ab98ab8c390a6"
-    end
+  if OS.linux? && Hardware::CPU.intel?
+    url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.3/issuectl-x86_64-unknown-linux-gnu.tar.xz"
+    sha256 "474737ab4f69595f984cf4f889901691afed738a50f5964de53ab98ab8c390a6"
   end
   license "MIT"
 
   BINARY_ALIASES = {
-    "aarch64-apple-darwin": {},
-    "x86_64-apple-darwin": {},
-    "x86_64-unknown-linux-gnu": {}
-  }
+    "aarch64-apple-darwin":     {},
+    "x86_64-apple-darwin":      {},
+    "x86_64-unknown-linux-gnu": {},
+  }.freeze
 
   def target_triple
     cpu = Hardware::CPU.arm? ? "aarch64" : "x86_64"
@@ -42,15 +40,9 @@ class Issuectl < Formula
   end
 
   def install
-    if OS.mac? && Hardware::CPU.arm?
-      bin.install "issuectl"
-    end
-    if OS.mac? && Hardware::CPU.intel?
-      bin.install "issuectl"
-    end
-    if OS.linux? && Hardware::CPU.intel?
-      bin.install "issuectl"
-    end
+    bin.install "issuectl" if OS.mac? && Hardware::CPU.arm?
+    bin.install "issuectl" if OS.mac? && Hardware::CPU.intel?
+    bin.install "issuectl" if OS.linux? && Hardware::CPU.intel?
 
     install_binary_aliases!
 
