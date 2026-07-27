@@ -1,20 +1,20 @@
 class Issuectl < Formula
   desc "AI-first CLI for managing markdown-based issues with YAML frontmatter"
   homepage "https://github.com/jarimustonen/issuectl"
-  version "0.6.4"
+  version "0.6.5"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.4/issuectl-aarch64-apple-darwin.tar.xz"
-      sha256 "40578b7b64845f2717916eb72a6fde18a9cb4e79fd0c305749a2c99d8f92ac2d"
+      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.5/issuectl-aarch64-apple-darwin.tar.xz"
+      sha256 "ecbee9a47a959657212ad0f4d1242dd69e5fa765cad7d5a3efb76354b01cb525"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.4/issuectl-x86_64-apple-darwin.tar.xz"
-      sha256 "bdda9185742a89be481fad31d4922878dd086dc1837651fac7216f715317eb9f"
+      url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.5/issuectl-x86_64-apple-darwin.tar.xz"
+      sha256 "8bfa0aa10d3d257aff7b24aeece6aa500d385dd93a55e091dea639c917295bae"
     end
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.4/issuectl-x86_64-unknown-linux-gnu.tar.xz"
-    sha256 "64f35d62a2ef389ec3783cfefdd9ff1455c738ba777901499a6549d67bc73c26"
+    url "https://github.com/jarimustonen/issuectl/releases/download/v0.6.5/issuectl-x86_64-unknown-linux-gnu.tar.xz"
+    sha256 "34c2e5bd861be2e998de4be7758f75d515bf1b1442447e31aab3de6850be4a44"
   end
   license "MIT"
 
