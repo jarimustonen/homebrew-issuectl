@@ -1,20 +1,20 @@
 class Issuectl < Formula
   desc "AI-first CLI for managing markdown-based issues with YAML frontmatter"
   homepage "https://github.com/jarimustonen/issuectl"
-  version "0.8.0"
+  version "0.8.1"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/jarimustonen/issuectl/releases/download/v0.8.0/issuectl-aarch64-apple-darwin.tar.xz"
-      sha256 "02a6dc1602e7138f072248416b9b5640345fb0154f076325dab00535a6673a59"
+      url "https://github.com/jarimustonen/issuectl/releases/download/v0.8.1/issuectl-aarch64-apple-darwin.tar.xz"
+      sha256 "0c5a3e391fb150e0e1aa93fb20c0dbffcc1d0798ddd4572a17409e47eea70fd6"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/jarimustonen/issuectl/releases/download/v0.8.0/issuectl-x86_64-apple-darwin.tar.xz"
-      sha256 "f7f9d3949054db9bc9f2fc979c9805f0f0a506a74ebbe1916fa72e9710431d1c"
+      url "https://github.com/jarimustonen/issuectl/releases/download/v0.8.1/issuectl-x86_64-apple-darwin.tar.xz"
+      sha256 "11b9564050263f7e3459f0c7d92e8f4291bfc546fce26a45ac7d1b7248d1bcc0"
     end
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/jarimustonen/issuectl/releases/download/v0.8.0/issuectl-x86_64-unknown-linux-gnu.tar.xz"
-    sha256 "6140da42df11c0d36f5cc5083f79676ff95cd3f71ba4d63a71471be9213e0e26"
+    url "https://github.com/jarimustonen/issuectl/releases/download/v0.8.1/issuectl-x86_64-unknown-linux-gnu.tar.xz"
+    sha256 "5e7ad1341f903f2eb94e0b11c991ae8e54dd8c26052fcedfe471b7182e164aa8"
   end
   license "MIT"
 
@@ -40,9 +40,15 @@ class Issuectl < Formula
   end
 
   def install
-    bin.install "issuectl" if OS.mac? && Hardware::CPU.arm?
-    bin.install "issuectl" if OS.mac? && Hardware::CPU.intel?
-    bin.install "issuectl" if OS.linux? && Hardware::CPU.intel?
+    if OS.mac? && Hardware::CPU.arm?
+      bin.install "issuectl"
+    end
+    if OS.mac? && Hardware::CPU.intel?
+      bin.install "issuectl"
+    end
+    if OS.linux? && Hardware::CPU.intel?
+      bin.install "issuectl"
+    end
 
     install_binary_aliases!
 
